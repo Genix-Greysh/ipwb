@@ -32,7 +32,7 @@ from util import IPFSAPI_IP, IPFSAPI_PORT, IPWBREPLAY_IP, IPWBREPLAY_PORT
 from util import INDEX_FILE
 from requests import ReadTimeout
 
-from Crypto.Cipher import XOR
+from Cryptodome.Util.strxor import strxor
 import base64
 
 from werkzeug.routing import BaseConverter

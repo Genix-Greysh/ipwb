@@ -26,7 +26,7 @@ from util import IPFSAPI_IP, IPFSAPI_PORT, IPWBREPLAY_IP, IPWBREPLAY_PORT
 import requests
 import datetime
 
-from Crypto.Cipher import XOR
+from Cryptodome.Util.strxor import strxor
 import base64
 
 from __init__ import __version__ as ipwbVersion
@@ -63,10 +63,10 @@ def pushToIPFS(hstr, payload):
 
 
 def encrypt(hstr, payload, encryptionKey):
-    hstr = XOR.new(encryptionKey).encrypt(hstr)
+    hstr = strxor(encryptionKey, hstr)
     hstr = base64.b64encode(hstr)
 
-    payload = XOR.new(encryptionKey).encrypt(payload)
+    payload = strxor(encryptionKey, payload).encrypt(payload)
     payload = base64.b64encode(payload)
 
     return [hstr, payload]
